@@ -1,0 +1,21 @@
+{
+    "model": {
+        "model_display_name": "ToyModel",
+        "model_version": "v1",
+        "model_specific_arg": "foo"
+        
+    },
+    
+    "train": {
+        "trainer": "toytrainer",
+        "epochs": 5,
+        "bs": 16,
+        "optim_kwargs": {"lr": 3e-4, "wd": 0.01},
+        "sched_kwargs": {"div_factor": 1, "final_div_factor": 10000, "pct_start": 0.7, "three_phase":false, "cycle_momentum": true}
+
+    },
+
+    "infer":{
+        "pretrained" : null
+    }
+}
