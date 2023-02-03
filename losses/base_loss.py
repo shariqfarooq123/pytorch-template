@@ -25,5 +25,5 @@ import torch
 import torch.nn as nn
 from registry import LossRegistry
 
-class BaseLoss(nn.Module, LossRegistry, loss_name='ignore'):
+class BaseLoss(nn.Module, LossRegistry, name='ignore'):
     pass

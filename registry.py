@@ -36,7 +36,7 @@ def _create_registry():
             if name in cls._registry:
                 raise ValueError(f"object name {name} already registered")
             
-            if name == 'ignore':
+            if 'ignore' in name:
                 return
             
             cls._registry[name] = cls

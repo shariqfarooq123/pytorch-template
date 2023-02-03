@@ -20,9 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from registry import create_model, create_dataset, list_models, list_datasets
+from registry import create_model, create_dataset, list_models, list_datasets, list_losses
 from utils.config import get_config
 
 conf = get_config("toymodel")
 model = create_model("toymodel", **conf)
 print(list(model.parameters()))
+
+print(list_models())
+print(list_datasets())
+print(list_losses())
