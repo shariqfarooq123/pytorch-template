@@ -5,7 +5,7 @@ from pathlib import Path
 OLD_HEADER = """
 # MIT License
 
-# Copyright (c) 2022 Intelligent Systems Lab Org
+# Copyright (c) 2022 //foo bar//
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,6 @@ OLD_HEADER = """
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-# File author: Shariq Farooq Bhat
 """
 
 HEADER = """
@@ -56,20 +54,25 @@ HEADER = """
 def replace_or_add_header(fpath):
     """Given a file path, replace the header if it exists or add a new header."""
 
-    with open(fpath, 'w+') as f:
-        content = f.read()
-        if OLD_HEADER in content:
-            content = content.replace(OLD_HEADER, HEADER)
+    with open(fpath, 'r') as f:
+        content = str(f.read())
+
+        if OLD_HEADER.strip() in content.strip():
+            content = content.replace(OLD_HEADER.strip(), HEADER.strip())
+        
+        elif HEADER.strip() in content.strip():
+            return
         else:
             content = HEADER + content
-        f.seek(0)
+    
+    with open(fpath, 'w') as f:
         f.write(content)
         f.truncate()
 
 def header_to_all_files(root_dir):
     """Given a root directory, add headers to all files in the directory."""
     for fpath in glob.glob(root_dir + '/**/*.py', recursive=True):
-        if 'header.py' in fpath:
+        if 'header.py' in fpath or 'easydict' in fpath:
             continue
         replace_or_add_header(fpath)
 
